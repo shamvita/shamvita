@@ -1,0 +1,20 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ContactForm from '../components/ContactForm.jsx';
+---
+
+<Layout title="Agendar llamada estratégica — Shamvita">
+	<section class="section">
+		<div class="container-sm">
+			<div class="animate-fade-up" style={{ textAlign: 'center', marginBottom: '48px' }}>
+				<h1 style={{ fontSize: '40px', fontWeight: 700, letterSpacing: '-0.02em', marginBottom: '16px' }}>
+					Hablemos de tu próximo paso estratégico
+				</h1>
+				<p style={{ fontSize: '18px', color: 'var(--color-text-secondary)', lineHeight: 1.6 }}>
+					Completa el formulario y nos pondremos en contacto para agendar tu diagnóstico gratuito de 30 minutos.
+				</p>
+			</div>
+			<ContactForm client:load />
+		</div>
+	</section>
+</Layout>

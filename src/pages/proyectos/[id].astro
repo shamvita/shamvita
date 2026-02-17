@@ -1,0 +1,25 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import CaseStudy from '../../components/CaseStudy.jsx';
+import { CASE_STUDIES } from '../../data/caseStudies';
+
+export function getStaticPaths() {
+  return Object.keys(CASE_STUDIES).map(id => ({
+    params: { id },
+    props: { project: CASE_STUDIES[id] }
+  }));
+}
+
+const { id } = Astro.params;
+const { project } = Astro.props;
+---
+
+<Layout title={`${project.title} — Casos de éxito Shamvita`} description={project.challenge}>
+	<main>
+		<CaseStudy 
+			client:load 
+			project={project} 
+			CASE_STUDIES={CASE_STUDIES} 
+		/>
+	</main>
+</Layout>

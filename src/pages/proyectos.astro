@@ -1,0 +1,104 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ProjectCard from '../components/ProjectCard.jsx';
+import { PORTFOLIO_ITEMS } from '../data/caseStudies';
+
+const categories = ['Todos', 'ERP', 'POS', 'Web Apps', 'Mobile'];
+---
+
+<Layout title="Portafolio de Proyectos — Shamvita Software Studio">
+	<section class="section animate-fade-up">
+		<div class="container">
+			{/* Header */}
+			<div
+				style={{
+					display: 'flex',
+					flexWrap: 'wrap',
+					justifyContent: 'space-between',
+					alignItems: 'flex-end',
+					marginBottom: '48px',
+					gap: '20px',
+				}}
+			>
+				<div>
+					<h1
+						style={{
+							fontSize: '36px',
+							fontWeight: 600,
+							color: 'var(--color-text-primary)',
+							letterSpacing: '-0.02em',
+						}}
+					>
+						Nuestro Trabajo
+					</h1>
+					<p
+						style={{
+							fontSize: '16px',
+							color: 'var(--color-text-secondary)',
+							marginTop: '6px',
+						}}
+					>
+						Soluciones técnicas entregadas con éxito.
+					</p>
+				</div>
+				<div
+					style={{
+						display: 'flex',
+						gap: '6px',
+						overflowX: 'auto',
+						paddingBottom: '4px',
+					}}
+				>
+					{categories.map((cat) => (
+						<button
+							style={{
+								padding: '8px 16px',
+								borderRadius: '980px',
+								fontSize: '13px',
+								fontWeight: 600,
+								whiteSpace: 'nowrap',
+								border: 'none',
+								cursor: 'pointer',
+								fontFamily: "'Fredoka', sans-serif",
+								transition: 'all 0.2s',
+								background:
+									cat === 'Todos'
+										? 'var(--color-brand)'
+										: 'var(--color-surface)',
+								color:
+									cat === 'Todos'
+										? 'white'
+										: 'var(--color-text-secondary)',
+							}}
+						>
+							{cat}
+						</button>
+					))}
+				</div>
+			</div>
+
+			{/* Grid */}
+			<div
+				style={{
+					display: 'grid',
+					gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
+					gap: '32px',
+				}}
+			>
+				{PORTFOLIO_ITEMS.map((item, i) => (
+					<div class={`animate-fade-up delay-${Math.min((i + 1) * 100, 400)}`}>
+						<a href={`/proyectos/${item.id}`} style={{ textDecoration: 'none' }}>
+							<ProjectCard
+								client:load
+								title={item.title}
+								tech={item.tech}
+								cat={item.cat}
+								image={item.image}
+							/>
+						</a>
+					</div>
+				))}
+			</div>
+		</div>
+	</section>
+</Layout>

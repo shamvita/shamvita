@@ -1,0 +1,224 @@
+@import "tailwindcss";
+
+/* ─── Design Tokens ─── */
+@theme {
+    --color-brand: #A36AF3;
+    --color-brand-light: #EDE5FB;
+    --color-brand-hover: #8F52E0;
+    --color-text-primary: #1D1D1F;
+    --color-text-secondary: #6E6E73;
+    --color-text-tertiary: #86868B;
+    --color-surface: #F5F5F7;
+    --color-surface-elevated: #FFFFFF;
+    --color-border: #D2D2D7;
+    --color-border-light: #E8E8ED;
+    --color-success: #30D158;
+}
+
+/* ─── Base ─── */
+html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    font-family: 'Fredoka', sans-serif;
+    color: var(--color-text-primary);
+    background: var(--color-surface-elevated);
+    line-height: 1.6;
+}
+
+/* ─── Animations ─── */
+@keyframes fade-up {
+    from {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes scale-in {
+    from {
+        opacity: 0;
+        transform: scale(0.96);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.animate-fade-up {
+    animation: fade-up 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.animate-fade-in {
+    animation: fade-in 0.5s ease both;
+}
+
+.animate-scale-in {
+    animation: scale-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.delay-100 {
+    animation-delay: 0.1s;
+}
+
+.delay-200 {
+    animation-delay: 0.2s;
+}
+
+.delay-300 {
+    animation-delay: 0.3s;
+}
+
+.delay-400 {
+    animation-delay: 0.4s;
+}
+
+/* ─── Button: Primary ─── */
+.btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 28px;
+    background: var(--color-brand);
+    color: white;
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    border-radius: 980px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+    letter-spacing: -0.01em;
+}
+
+.btn-primary:hover {
+    background: var(--color-brand-hover);
+    transform: scale(1.02);
+}
+
+.btn-primary:active {
+    transform: scale(0.98);
+}
+
+/* ─── Button: Secondary ─── */
+.btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 28px;
+    background: transparent;
+    color: var(--color-brand);
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    border-radius: 980px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+    letter-spacing: -0.01em;
+}
+
+.btn-secondary:hover {
+    background: var(--color-brand-light);
+}
+
+.btn-secondary:active {
+    transform: scale(0.98);
+}
+
+/* ─── Badge ─── */
+.badge {
+    display: inline-block;
+    padding: 6px 14px;
+    background: var(--color-brand-light);
+    color: var(--color-brand);
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    border-radius: 980px;
+}
+
+/* ─── Section Spacing ─── */
+.section {
+    padding: 80px 24px;
+}
+
+.section-lg {
+    padding: 120px 24px;
+}
+
+.container {
+    max-width: 1120px;
+    margin: 0 auto;
+}
+
+.container-sm {
+    max-width: 860px;
+    margin: 0 auto;
+}
+
+/* ─── Divider ─── */
+.divider {
+    border: none;
+    border-top: 1px solid var(--color-border-light);
+}
+
+/* ─── Focus Ring (brand) ─── */
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(163, 106, 243, 0.15);
+    border-color: var(--color-brand) !important;
+}
+
+/* ─── Bento Grid Primitives ─── */
+.bento-cell {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border-light);
+    border-radius: 24px;
+    padding: 32px;
+    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.bento-cell:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04);
+}
+
+.bento-cell-dark {
+    background: var(--color-text-primary);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 24px;
+    padding: 32px;
+    color: white;
+}
+
+/* ─── Navbar Solid ─── */
+.navbar-solid {
+    background: rgba(255, 255, 255, 0.97);
+    border-bottom: 1px solid var(--color-border-light);
+}

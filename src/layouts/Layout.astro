@@ -1,0 +1,76 @@
+---
+import { ViewTransitions } from 'astro:transitions';
+import Navbar from '../components/Navbar.jsx';
+import Footer from '../components/Footer.jsx';
+import '../styles/global.css';
+
+interface Props {
+	title: string;
+	description?: string;
+	image?: string;
+	canonicalURL?: string;
+}
+
+const { 
+	title, 
+	description = "Shamvita Software Studio — Socio Estratégico de Crecimiento Digital. Transformamos operaciones en crecimiento medible y ROI en <90 días.",
+	image = "/og-image.png",
+	canonicalURL = Astro.url.href
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+	<head>
+		{/* Global Metadata */}
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="generator" content={Astro.generator} />
+
+		{/* Canonical URL */}
+		<link rel="canonical" href={canonicalURL} />
+
+		{/* Primary Meta Tags */}
+		<title>{title}</title>
+		<meta name="title" content={title} />
+		<meta name="description" content={description} />
+
+		{/* Open Graph / Facebook */}
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={Astro.url} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:image" content={new URL(image, Astro.url)} />
+
+		{/* Twitter */}
+		<meta property="twitter:card" content="summary_large_image" />
+		<meta property="twitter:url" content={Astro.url} />
+		<meta property="twitter:title" content={title} />
+		<meta property="twitter:description" content={description} />
+		<meta property="twitter:image" content={new URL(image, Astro.url)} />
+
+		{/* Fonts */}
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+		<ViewTransitions fallback="animate" />
+		<style is:global>
+			/* Snappy Apple-style transitions (200ms) */
+			::view-transition-old(root),
+			::view-transition-new(root) {
+				animation-duration: 200ms;
+				animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+			}
+		</style>
+	</head>
+	<body data-astro-prefetch="hover">
+		<Navbar client:load transition:persist />
+		<main transition:animate="fade">
+			<slot />
+		</main>
+		<Footer client:visible transition:persist />
+	</body>
+</html>
+
