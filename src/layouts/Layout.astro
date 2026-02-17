@@ -2,6 +2,7 @@
 import { ViewTransitions } from 'astro:transitions';
 import Navbar from '../components/Navbar.jsx';
 import Footer from '../components/Footer.jsx';
+import JsonLd from '../components/JsonLd.astro';
 import '../styles/global.css';
 
 interface Props {
@@ -9,13 +10,15 @@ interface Props {
 	description?: string;
 	image?: string;
 	canonicalURL?: string;
+	extraJsonLd?: { type: string; data: any };
 }
 
 const { 
 	title, 
 	description = "Shamvita Software Studio — Socio Estratégico de Crecimiento Digital. Transformamos operaciones en crecimiento medible y ROI en <90 días.",
-	image = "/og-image.png",
-	canonicalURL = Astro.url.href
+	image = "/og/home.png",
+	canonicalURL = new URL(Astro.url.pathname, Astro.site).href,
+	extraJsonLd
 } = Astro.props;
 ---
 
@@ -28,6 +31,40 @@ const {
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="generator" content={Astro.generator} />
 
+		{/* AI / Bot Optimization */}
+		<JsonLd 
+			type="Organization" 
+			data={{
+				"name": "Shamvita Software Studio",
+				"url": "https://shamvita.tech",
+				"logo": "https://shamvita.tech/logo.svg",
+				"description": "Socio Estratégico de Crecimiento Digital. Transformamos operaciones en crecimiento medible.",
+				"address": {
+					"@type": "PostalAddress",
+					"addressCountry": "DO"
+				},
+				"contactPoint": {
+					"@type": "ContactPoint",
+					"contactType": "customer support",
+					"email": "hola@shamvita.tech"
+				}
+			}} 
+		/>
+		<JsonLd 
+			type="WebSite" 
+			data={{
+				"name": "Shamvita Software Studio",
+				"url": "https://shamvita.tech",
+				"potentialAction": {
+					"@type": "SearchAction",
+					"target": "https://shamvita.tech/search?q={search_term_string}",
+					"query-input": "required name=search_term_string"
+				}
+			}} 
+		/>
+
+		{extraJsonLd && <JsonLd type={extraJsonLd.type as any} data={extraJsonLd.data} />}
+
 		{/* Canonical URL */}
 		<link rel="canonical" href={canonicalURL} />
 
@@ -38,17 +75,17 @@ const {
 
 		{/* Open Graph / Facebook */}
 		<meta property="og:type" content="website" />
-		<meta property="og:url" content={Astro.url} />
+		<meta property="og:url" content={new URL(Astro.url.pathname, Astro.site)} />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
-		<meta property="og:image" content={new URL(image, Astro.url)} />
+		<meta property="og:image" content={new URL(image, Astro.site)} />
 
 		{/* Twitter */}
-		<meta property="twitter:card" content="summary_large_image" />
-		<meta property="twitter:url" content={Astro.url} />
-		<meta property="twitter:title" content={title} />
-		<meta property="twitter:description" content={description} />
-		<meta property="twitter:image" content={new URL(image, Astro.url)} />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:url" content={new URL(Astro.url.pathname, Astro.site)} />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={new URL(image, Astro.site)} />
 
 		{/* Fonts */}
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -66,7 +103,7 @@ const {
 		</style>
 	</head>
 	<body data-astro-prefetch="hover">
-		<Navbar client:load transition:persist />
+		<Navbar client:load transition:persist currentPath={Astro.url.pathname} />
 		<main transition:animate="fade">
 			<slot />
 		</main>
