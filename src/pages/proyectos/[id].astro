@@ -14,7 +14,25 @@ const { id } = Astro.params;
 const { project } = Astro.props;
 ---
 
-<Layout title={`${project.title} — Casos de éxito Shamvita`} description={project.challenge}>
+<Layout 
+	title={`${project.title} — Casos de éxito Shamvita`} 
+	description={project.challenge} 
+	image={`/og/${id}.png`}
+	extraJsonLd={{
+		type: 'Project',
+		data: {
+			"name": project.title,
+			"description": project.challenge,
+			"url": `https://shamvita.tech/proyectos/${id}`,
+			"image": `https://shamvita.tech/og/${id}.png`,
+			"client": project.client,
+			"creator": {
+				"@type": "Organization",
+				"name": "Shamvita Software Studio"
+			}
+		}
+	}}
+>
 	<main>
 		<CaseStudy 
 			client:load 

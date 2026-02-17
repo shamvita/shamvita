@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { List, X } from '@phosphor-icons/react';
 import ShamvitaLogo from './ShamvitaLogo';
 
-const Navbar = () => {
+const Navbar = ({ currentPath: propPath }) => {
     const [mobileMenu, setMobileMenu] = useState(false);
 
-    // Using window.location.pathname to determine active state
-    const currentPath = typeof window !== 'undefined' ? window.location.pathname : '';
+    // Using propPath from SSR, with fallback for client-side transitions
+    const currentPath = propPath || (typeof window !== 'undefined' ? window.location.pathname : '');
 
     const navLinks = [
         { label: 'Soluciones', href: '/#soluciones' },

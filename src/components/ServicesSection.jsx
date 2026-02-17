@@ -177,28 +177,6 @@ const ServicesSection = () => {
                                     )}
                                 </div>
 
-                                {!item.isPrimary && (
-                                    <div style={{
-                                        marginTop: 'auto',
-                                        display: 'flex',
-                                        justifyContent: 'flex-end'
-                                    }}>
-                                        <div
-                                            style={{
-                                                width: '32px',
-                                                height: '32px',
-                                                borderRadius: '50%',
-                                                background: 'var(--color-surface-elevated)',
-                                                display: 'flex',
-                                                alignItems: 'center',
-                                                justifyContent: 'center',
-                                                color: 'var(--color-text-tertiary)'
-                                            }}
-                                        >
-                                            <ArrowRight size={14} weight="bold" />
-                                        </div>
-                                    </div>
-                                )}
                             </div>
                         );
                     })}
